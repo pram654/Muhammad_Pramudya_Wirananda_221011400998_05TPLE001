@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Manajemen Karyawan</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="foto/icon.ico" type="image/x-icon">
+</head>
+<body class="bg-light">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile-section" style="background: var(--primary-color);">
+            <div class="d-flex align-items-center px-3">
+                <img src="foto/profile.png" width="40" height="40" class="rounded-circle me-2" alt="Profile">
+                <div class="ms-3">
+                    <div class="fs-6">MUHAMMAD PRAMUDYA WIRANANDA</div>
+                    <p class="my-1 fw-bold text-white">Admin</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="menu-section px-3">
+            <div class="menu-title">MENU UTAMA</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html" onclick="showTab('dashboard')">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="karyawan_page.html" onclick="showTab('karyawan')">
+                        <i class="fas fa-users me-2"></i>Karyawan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="jabatan_page.html" onclick="showTab('jabatan')">
+                        <i class="fas fa-briefcase me-2"></i>Jabatan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="divisi_page.html" onclick="showTab('divisi')">
+                        <i class="fas fa-sitemap me-2"></i>Divisi
+                    </a>
+                </li>
+            </ul>
+
+            <div class="menu-title mt-3">KEHADIRAN</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="data_absen_page.html" onclick="showTab('absensi')">
+                        <i class="fas fa-clock me-2"></i>Absensi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="data_izin_page.html" onclick="showTab('izin')">
+                        <i class="fas fa-calendar-alt me-2"></i>Izin
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="data lembur_page.html" onclick="showTab('lembur')">
+                        <i class="fas fa-business-time me-2"></i>Lembur
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-header">
+            <h4 class="mb-0">Sistem Informasi Manajemen Karyawan</h4>
+            <div>Admin Dashboard</div>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div class="tab-pane active" id="dashboard">
+            <div class="container-fluid py-4">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary text-white">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="text-muted">Data Pegawai</div>
+                            <h3 class="mb-0">10</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success text-white">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="text-muted">Absensi Hari ini</div>
+                            <h3 class="mb-0">10</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning text-white">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="text-muted">Izin Menunggu Konfirmasi</div>
+                            <h3 class="mb-0">5</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info text-white">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="text-muted">Lembur Menunggu Konfirmasi</div>
+                            <h3 class="mb-0">5</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
+

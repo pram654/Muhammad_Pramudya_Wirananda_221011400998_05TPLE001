@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Manajemen Divisi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="foto/icon.ico" type="image/x-icon">
+
+</head>
+<body class="bg-light">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile-section" style="background: var(--primary-color);">
+            <div class="d-flex align-items-center px-3">
+                <img src="foto/profile.png" width="40" height="40" class="rounded-circle me-2" alt="Profile">
+                <div class="ms-3">
+                    <div class="fs-6">MUHAMMAD PRAMUDYA WIRANANDA</div>
+                    <p class="my-1 fw-bold text-white">Admin</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="menu-section px-3">
+            <div class="menu-title">MENU UTAMA</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" onclick="showTab('dashboard')">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="karyawan_page.html" onclick="showTab('karyawan')">
+                        <i class="fas fa-users me-2"></i>Karyawan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="jabatan_page.html" onclick="showTab('jabatan')">
+                        <i class="fas fa-briefcase me-2"></i>Jabatan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="divisi_page.html" onclick="showTab('divisi')">
+                        <i class="fas fa-sitemap me-2"></i>Divisi
+                    </a>
+                </li>
+            </ul>
+
+            <div class="menu-title mt-3">KEHADIRAN</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="data_absen_page.html" onclick="showTab('absensi')">
+                        <i class="fas fa-clock me-2"></i>Absensi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="data_izin_page.html" onclick="showTab('izin')">
+                        <i class="fas fa-calendar-alt me-2"></i>Izin
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="data_lembur_page.html" onclick="showTab('lembur')">
+                        <i class="fas fa-business-time me-2"></i>Lembur
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-header">
+            <h4 class="mb-0">Sistem Informasi Manajemen Divisi</h4>
+            <div>Data Divisi</div>
+        </div>
+        <div class="container mt-5">
+          <button class="btn btn-primary mb-3 float-end" data-bs-toggle="modal" data-bs-target="#addDivisionModal">Tambah Divisi</button>
+          
+          <table class="table table-bordered">
+              <thead>
+                  <tr>
+                      <th>No</th>
+                      <th>Kode Divisi</th>
+                      <th>Divisi</th>
+                      <th>Aksi</th>
+                  </tr>
+              </thead>
+              <tbody id="divisionTableBody">
+                  <!-- Data Divisi -->
+                  <tr>
+                      <td>1</td>
+                      <td>DIV001</td>
+                      <td>Pemasaran</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>2</td>
+                      <td>DIV002</td>
+                      <td>Keuangan</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>3</td>
+                      <td>DIV003</td>
+                      <td>SDM</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>4</td>
+                      <td>DIV004</td>
+                      <td>IT</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      
+      <!-- Modal untuk menambah divisi -->
+      <div class="modal fade" id="addDivisionModal" tabindex="-1" aria-labelledby="addDivisionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addDivisionModalLabel">Tambah Divisi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addDivisionForm">
+                        <div class="mb-3">
+                            <label for="divisionName" class="form-label">Divisi</label>
+                            <input type="text" class="form-control" id="divisionName" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="saveDivisionButton">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <script>
+        let divisionCount = 4;
+
+        document.getElementById('saveDivisionButton').addEventListener('click', function() {
+            const division = document.getElementById('divisionName').value;
+
+            if (division) {
+                divisionCount++;
+                const tableBody = document.getElementById('divisionTableBody');
+                const row = `<tr>
+                                <td>${divisionCount}</td>
+                                <td>DIV00${divisionCount}</td>
+                                <td>${division}</td>
+                                <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                             </tr>`;
+                tableBody.insertAdjacentHTML('beforeend', row);
+
+                // Reset form
+                document.getElementById('addDivisionForm').reset();
+
+                // Menutup modal dan menghapus backdrop
+                const addDivisionModal = bootstrap.Modal.getInstance(document.getElementById('addDivisionModal'));
+                addDivisionModal.hide();
+            }
+        });
+
+        function deleteRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+            divisionCount--;
+            updateRowNumbers();
+        }
+
+        function updateRowNumbers() {
+            const rows = document.querySelectorAll('#divisionTableBody tr');
+            rows.forEach((row, index) => {
+                row.cells[0].innerText = index + 1; // Update No column
+                row.cells[1].innerText = 'DIV00' + (index + 1); // Update Kode Divisi column
+            });
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

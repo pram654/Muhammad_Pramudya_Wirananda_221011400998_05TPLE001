@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Manajemen Jabatan</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="foto/icon.ico" type="image/x-icon">
+
+</head>
+<body class="bg-light">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile-section" style="background: var(--primary-color);">
+            <div class="d-flex align-items-center px-3">
+                <img src="foto/profile.png" width="40" height="40" class="rounded-circle me-2" alt="Profile">
+                <div class="ms-3">
+                    <div class="fs-6">MUHAMMAD PRAMUDYA WIRANANDA</div>
+                    <p class="my-1 fw-bold text-white">Admin</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="menu-section px-3">
+            <div class="menu-title">MENU UTAMA</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" onclick="showTab('dashboard')">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="karyawan_page.html" onclick="showTab('karyawan')">
+                        <i class="fas fa-users me-2"></i>Karyawan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="jabatan_page.html" onclick="showTab('jabatan')">
+                        <i class="fas fa-briefcase me-2"></i>Jabatan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="divisi_page.html" onclick="showTab('divisi')">
+                        <i class="fas fa-sitemap me-2"></i>Divisi
+                    </a>
+                </li>
+            </ul>
+
+            <div class="menu-title mt-3">KEHADIRAN</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="data_absen_page.html" onclick="showTab('absensi')">
+                        <i class="fas fa-clock me-2"></i>Absensi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="data_izin_page.html" onclick="showTab('izin')">
+                        <i class="fas fa-calendar-alt me-2"></i>Izin
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="data_lembur_page.html" onclick="showTab('lembur')">
+                        <i class="fas fa-business-time me-2"></i>Lembur
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-header">
+            <h4 class="mb-0">Sistem Informasi Manajemen Jabatan</h4>
+            <div>Data Jabatan</div>
+        </div>
+        <div class="container mt-5">
+          <button class="btn btn-primary mb-3 float-end" data-bs-toggle="modal" data-bs-target="#addPositionModal">Tambah Jabatan</button>
+          
+          <table class="table table-bordered">
+              <thead>
+                  <tr>
+                      <th>No</th>
+                      <th>Kode Jabatan</th>
+                      <th>Jabatan</th>
+                      <th>Aksi</th>
+                  </tr>
+              </thead>
+              <tbody id="positionTableBody">
+                  <!-- Data Jabatan -->
+                  <tr>
+                      <td>1</td>
+                      <td>JAB001</td>
+                      <td>Manager</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>2</td>
+                      <td>JAB002</td>
+                      <td>Staff</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>3</td>
+                      <td>JAB003</td>
+                      <td>HR</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>4</td>
+                      <td>JAB004</td>
+                      <td>IT Support</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      
+      <!-- Modal untuk menambah jabatan -->
+      <div class="modal fade" id="addPositionModal" tabindex="-1" aria-labelledby="addPositionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPositionModalLabel">Tambah Jabatan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addPositionForm">
+                        <div class="mb-3">
+                            <label for="positionName" class="form-label">Jabatan</label>
+                            <input type="text" class="form-control" id="positionName" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="savePositionButton">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <script>
+        let positionCount = 4;
+
+        document.getElementById('savePositionButton').addEventListener('click', function() {
+            const position = document.getElementById('positionName').value;
+
+            if (position) {
+                positionCount++;
+                const tableBody = document.getElementById('positionTableBody');
+                const row = `<tr>
+                                <td>${positionCount}</td>
+                                <td>JAB00${positionCount}</td>
+                                <td>${position}</td>
+                                <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                             </tr>`;
+                tableBody.insertAdjacentHTML('beforeend', row);
+
+                // Reset form
+                document.getElementById('addPositionForm').reset();
+
+                // Menutup modal dan menghapus backdrop
+                const addPositionModal = bootstrap.Modal.getInstance(document.getElementById('addPositionModal'));
+                addPositionModal.hide();
+            }
+        });
+
+        function deleteRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+            positionCount--;
+            updateRowNumbers();
+        }
+
+        function updateRowNumbers() {
+            const rows = document.querySelectorAll('#positionTableBody tr');
+            rows.forEach((row, index) => {
+                row.cells[0].innerText = index + 1; // Update No column
+                row.cells[1].innerText = 'JAB00' + (index + 1); // Update Kode Jabatan column
+            });
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

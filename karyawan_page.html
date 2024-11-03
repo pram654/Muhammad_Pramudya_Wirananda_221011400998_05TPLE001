@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Manajemen Karyawan</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="foto/icon.ico" type="image/x-icon">
+
+</head>
+<body class="bg-light">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile-section" style="background: var(--primary-color);">
+            <div class="d-flex align-items-center px-3">
+                <img src="foto/profile.png" width="40" height="40" class="rounded-circle me-2" alt="Profile">
+                <div class="ms-3">
+                    <div class="fs-6">MUHAMMAD PRAMUDYA WIRANANDA</div>
+                    <p class="my-1 fw-bold text-white">Admin</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="menu-section px-3">
+            <div class="menu-title">MENU UTAMA</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" onclick="showTab('dashboard')">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="karyawan_page.html" onclick="showTab('karyawan')">
+                        <i class="fas fa-users me-2"></i>Karyawan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="jabatan_page.html" onclick="showTab('jabatan')">
+                        <i class="fas fa-briefcase me-2"></i>Jabatan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="divisi_page.html" onclick="showTab('divisi')">
+                        <i class="fas fa-sitemap me-2"></i>Divisi
+                    </a>
+                </li>
+            </ul>
+
+            <div class="menu-title mt-3">KEHADIRAN</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="data_absen_page.html" onclick="showTab('absensi')">
+                        <i class="fas fa-clock me-2"></i>Absensi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="data_izin_page.html" onclick="showTab('izin')">
+                        <i class="fas fa-calendar-alt me-2"></i>Izin
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="data lembur_page.html" onclick="showTab('lembur')">
+                        <i class="fas fa-business-time me-2"></i>Lembur
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-header">
+            <h4 class="mb-0">Sistem Informasi Manajemen Karyawan</h4>
+            <div>Data Karyawan</div>
+        </div>
+        <div class="container mt-5">
+          <button class="btn btn-primary mb-3 float-end" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">Tambah Karyawan</button>
+          
+          <table class="table table-bordered">
+              <thead>
+                  <tr>
+                      <th>No</th>
+                      <th>Kode</th>
+                      <th>Nama</th>
+                      <th>Email</th>
+                      <th>Alamat</th>
+                      <th>Jabatan</th>
+                      <th>Aksi</th>
+                  </tr>
+              </thead>
+              <tbody id="employeeTableBody">
+                  <!-- Data Karyawan -->
+                  <tr>
+                      <td>1</td>
+                      <td>K001</td>
+                      <td>Jaya Sukses</td>
+                      <td>jayasukses@gmail.com</td>
+                      <td>Jakarta</td>
+                      <td>Manager</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>2</td>
+                      <td>K002</td>
+                      <td>Putri Cendana</td>
+                      <td>putricendana@gmail.com</td>
+                      <td>Bandung</td>
+                      <td>Staff</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>3</td>
+                      <td>K003</td>
+                      <td>Budi Santoso</td>
+                      <td>budisantoso@gmail.com</td>
+                      <td>Yogyakarta</td>
+                      <td>HR</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>4</td>
+                      <td>K004</td>
+                      <td>Dewi Kencana</td>
+                      <td>dewikencana@gmail.com</td>
+                      <td>Surabaya</td>
+                      <td>IT Support</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>5</td>
+                      <td>K005</td>
+                      <td>Sandi Arunika</td>
+                      <td>sandiarunika@gmail.com</td>
+                      <td>Medan</td>
+                      <td>Staff</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>6</td>
+                      <td>K006</td>
+                      <td>Rina Bunga</td>
+                      <td>rinabunga@gmail.com</td>
+                      <td>Semarang</td>
+                      <td>Manager</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>7</td>
+                      <td>K007</td>
+                      <td>Gilang Putra</td>
+                      <td>gilangputra@gmail.com</td>
+                      <td>Bali</td>
+                      <td>HR</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>8</td>
+                      <td>K008</td>
+                      <td>Wira Prabowo</td>
+                      <td>wiraprabowo@gmail.com</td>
+                      <td>Palembang</td>
+                      <td>IT Support</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>9</td>
+                      <td>K009</td>
+                      <td>Yuni Astuti</td>
+                      <td>yuniastuti@gmail.com</td>
+                      <td>Makassar</td>
+                      <td>Staff</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+                  <tr>
+                      <td>10</td>
+                      <td>K010</td>
+                      <td>Hendra Kusuma</td>
+                      <td>hendrakusuma@gmail.com</td>
+                      <td>Medan</td>
+                      <td>Manager</td>
+                      <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      
+      <!-- Modal untuk menambah karyawan -->
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="addEmployeeModalLabel">Tambah Karyawan</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form id="addEmployeeForm">
+                  <div class="mb-3">
+                      <label for="employeeName" class="form-label">Nama</label>
+                      <input type="text" class="form-control" id="employeeName" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="employeeEmail" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="employeeEmail" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="employeeAddress" class="form-label">Alamat</label>
+                      <input type="text" class="form-control" id="employeeAddress" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="employeePosition" class="form-label">Jabatan</label>
+                      <select class="form-select" id="employeePosition" required>
+                          <option value="">Pilih Jabatan</option>
+                          <option value="Manager">Manager</option>
+                          <option value="Staff">Staff</option>
+                          <option value="HR">HR</option>
+                          <option value="IT Support">IT Support</option>
+                      </select>
+                  </div>
+                  <button type="button" class="btn btn-primary" id="saveButton">Simpan</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+      
+      
+    </div>
+
+      <script>
+          let employeeCount = 10;
+
+document.getElementById('saveButton').addEventListener('click', function() {
+    const name = document.getElementById('employeeName').value;
+    const email = document.getElementById('employeeEmail').value;
+    const address = document.getElementById('employeeAddress').value;
+    const position = document.getElementById('employeePosition').value;
+
+    if (name && email && address && position) {
+        employeeCount++;
+        const tableBody = document.getElementById('employeeTableBody');
+        const row = `<tr>
+                        <td>${employeeCount}</td>
+                        <td>K00${employeeCount}</td>
+                        <td>${name}</td>
+                        <td>${email}</td>
+                        <td>${address}</td>
+                        <td>${position}</td>
+                        <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Hapus</button></td>
+                     </tr>`;
+        tableBody.insertAdjacentHTML('beforeend', row);
+
+        // Reset form
+        document.getElementById('addEmployeeForm').reset();
+
+        // Menutup modal dan menghapus backdrop
+        const addEmployeeModal = bootstrap.Modal.getInstance(document.getElementById('addEmployeeModal'));
+        addEmployeeModal.hide();
+    }
+});
+
+function deleteRow(button) {
+    const row = button.closest('tr');
+    row.remove();
+    employeeCount--;
+    updateRowNumbers();
+}
+
+function updateRowNumbers() {
+    const rows = document.querySelectorAll('#employeeTableBody tr');
+    rows.forEach((row, index) => {
+        row.cells[0].innerText = index + 1; // Update No column
+        row.cells[1].innerText = 'K00' + (index + 1); // Update Kode column
+    });
+}
+      </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
+
